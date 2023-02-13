@@ -10,7 +10,7 @@ For reference only on what does NOT work (likely nothing will since we call out 
 
 ### Actually viable future
 
-#### Assumption: C functions are well within
+#### Assumption: Any external C functions are well below any timeout limits or hard timeout limit is not required
 
 Are you able to restore LuaJIT to a functional state from a jitted code such as `while true do end`?
 Assuming the above and that any functions the untrusted code can execute does not dominate:
