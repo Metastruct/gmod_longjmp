@@ -53,3 +53,28 @@ Setting up watches.  Beware: since -r was given, this may take a while!
 Watches established.
 
 ```
+
+
+```bash
+...
+
+lua: Calling complex function
+
+longjmp:longjmp.timed() timed out!
+lua: pcall of longjmp.timed returned:             true                false
+
+[New Thread 0x7fffd88376c0 (LWP 852962)]
+[New Thread 0x7fffd87366c0 (LWP 852963)]
+
+Thread 1 "srcdscustom" received signal SIGSEGV, Segmentation fault.
+0x00007fffd2e696c5 in ?? () from /home/srcds/Steam/steamapps/common/GarrysModDS/bin/linux64/lua_shared.so
+(gdb) bt
+#0  0x00007fffd2e696c5 in ?? () from /home/srcds/Steam/steamapps/common/GarrysModDS/bin/linux64/lua_shared.so
+#1  0x00007fffd2e5b8a2 in lua_pcall () from /home/srcds/Steam/steamapps/common/GarrysModDS/bin/linux64/lua_shared.so
+#2  0x00007ffff7fb3a44 in longjmp_timed (L=0x7ffff6d5e378) at ../../src/gmlongjmp.cpp:221
+#3  0x00007fffd2e69865 in ?? () from /home/srcds/Steam/steamapps/common/GarrysModDS/bin/linux64/lua_shared.so
+#4  0x00007fffd2e5b8a2 in lua_pcall () from /home/srcds/Steam/steamapps/common/GarrysModDS/bin/linux64/lua_shared.so
+#5  0x00007fffd2e1d18c in ?? () from /home/srcds/Steam/steamapps/common/GarrysModDS/bin/linux64/lua_shared.so
+#6  0x00007fffd2e25655 in ?? () from /home/srcds/Steam/steamapps/common/GarrysModDS/bin/linux64/lua_shared.so
+...
+```
