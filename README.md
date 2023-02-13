@@ -1,11 +1,12 @@
 # gmod_longjmp
 
+**Purpose/idea:** for sandboxing code (in-process, time-limiting)
 
-Escaping lua/C/C++ stack frames. 
+*What if one day we could have compiled/jitted code we can escape from with a timer/signal*
 
-DOES NOT WORK. 
+**DOES NOT WORK.**
 
-For reference only what does not work.
+For reference only on what does NOT work (likely nothing will since we call out of untrusted into arbitrary functions).
 
 ```bash
 srcds@meta3:~/compiling_for_gmod_x64/gmod_longjmp$ ./ci.sh
