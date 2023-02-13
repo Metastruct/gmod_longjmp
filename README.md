@@ -35,10 +35,10 @@ On timeout, discard the whole state. It wasn't calling anything C anyway.
 
 
 ### 4. Solutions/issues elsewhere
+ - [v8 Javascript isolate::TerminateExecution()](https://v8docs.nodesource.com/node-4.8/d5/dda/classv8_1_1_isolate.html#ab33b5ea0fbd412614931733449c3d659)
  - https://github.com/tarantool/tarantool/issues/1898
  - https://github.com/LuaJIT/LuaJIT/issues/723#issuecomment-862662396
  - https://github.com/WebAssembly/design/issues/1380
- - 
 
 ## Test output (works sometimes (undefined behaviour!))
 
