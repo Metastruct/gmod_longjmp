@@ -10,7 +10,9 @@ For reference only on what does NOT work (likely nothing will since we call out 
 
 ## Alternative approaches
 
-### 1. Assumption: Any external C functions are well below any timeout limits or hard timeout limit is not required
+### 1. Assumption: Any external C functions are well below any timeout limits or a hard timeout limit is not required
+
+Required modifications: [LUAJIT_ENABLE_CHECKHOOK](https://github.com/LuaJIT/LuaJIT/blob/master/src/lj_record.c#L2239) or some way to patch the presently running code to contain the check if jitted (*undefined computation behaviour of escaping loops prematurely and such needs to be tolerated but this would happen anyway with sethook*)
 
 Are you able to restore LuaJIT to a functional state from a jitted code such as `while true do end`?
 Assuming the above and that any functions the untrusted code can execute does not dominate:
@@ -27,6 +29,11 @@ Assuming the above and that any functions the untrusted code can execute does no
 
 In-process checkpointing of memory allocations/stack/etc and other modifications and restore fully to previous state on timeout and close any new handles and such. Similar to DMTCP.
 
+### Solutions/issues elsewhere
+ - https://github.com/tarantool/tarantool/issues/1898
+ - https://github.com/LuaJIT/LuaJIT/issues/723#issuecomment-862662396
+ - https://github.com/WebAssembly/design/issues/1380
+ - 
 
 ## Test output (works sometimes (undefined behaviour!))
 
