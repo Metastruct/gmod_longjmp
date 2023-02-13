@@ -29,7 +29,12 @@ Assuming the above and that any functions the untrusted code can execute does no
 
 In-process checkpointing of memory allocations/stack/etc and other modifications and restore fully to previous state on timeout and close any new handles and such. Similar to DMTCP.
 
-### Solutions/issues elsewhere
+### 3. Separate lua state with faked api environment that calls back to the actual state
+
+On timeout, discard the whole state. It wasn't calling anything C anyway.
+
+
+### 4. Solutions/issues elsewhere
  - https://github.com/tarantool/tarantool/issues/1898
  - https://github.com/LuaJIT/LuaJIT/issues/723#issuecomment-862662396
  - https://github.com/WebAssembly/design/issues/1380
