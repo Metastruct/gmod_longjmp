@@ -8,6 +8,28 @@
 
 For reference only on what does NOT work (likely nothing will since we call out of untrusted into almost arbitrary complexity functions that might for example allocate FDs or memory).
 
+### Actually viable future
+
+#### Assumption: C functions are well within
+
+Are you able to restore LuaJIT to a functional state from a jitted code such as `while true do end`?
+Assuming the above and that any functions the untrusted code can execute does not dominate:
+ - on timeout, restore if within lua
+ - if calling a C function: breakpoint/callback on resuming lua execution at which point execution would be possible again
+  
+**Problems:** nested lua:
+1. Enter timeout function:
+2. Run `ply:Kill()` 
+3. C runs Lua
+4. `hook.Add("OnPlayerDying","",function() ` timing out here is not possible unless we can peel this frame separately and then kill part 2. separately after we are back in lua ` end)`
+
+#### Copy-on-write approach
+
+In-process checkpointing of memory allocations/stack/etc and other modifications and restore fully to previous state on timeout and close any new handles and such. Similar to DMTCP.
+
+
+### Test output (works sometimes (undefined behaviour!))
+
 ```bash
 srcds@meta3:~/compiling_for_gmod_x64/gmod_longjmp$ ./ci.sh
 Setting up watches.  Beware: since -r was given, this may take a while!
