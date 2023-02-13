@@ -6,7 +6,7 @@
 
 **DOES NOT WORK.**
 
-For reference only on what does NOT work (likely nothing will since we call out of untrusted into arbitrary functions).
+For reference only on what does NOT work (likely nothing will since we call out of untrusted into almost arbitrary complexity functions that might for example allocate FDs or memory).
 
 ```bash
 srcds@meta3:~/compiling_for_gmod_x64/gmod_longjmp$ ./ci.sh
