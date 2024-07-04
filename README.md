@@ -29,6 +29,9 @@ Assuming the above and that any functions the untrusted code can execute does no
 
 In-process checkpointing of memory allocations/stack/etc and other modifications and restore fully to previous state on timeout and close any new handles and such. Similar to DMTCP.
 
+fork: 8ms, too slow
+vfork: similar to longjmp so same problems arise with state getting mangled.
+
 ### 3. Separate lua state with faked api environment that calls back to the actual state
 
 On timeout, discard the whole state. It wasn't calling anything C anyway.
