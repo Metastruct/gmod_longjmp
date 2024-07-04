@@ -19,11 +19,21 @@ Assuming the above and that any functions the untrusted code can execute does no
  - on timeout, restore if within lua
  - if calling a C function: breakpoint/callback on resuming lua execution at which point execution would be possible again
   
-**Problems:** nested lua:
-1. Enter timeout function:
-2. Run `ply:Kill()` 
-3. C runs Lua
-4. `hook.Add("OnPlayerDying","",function() ` timing out here is not possible unless we can peel this frame separately and then kill part 2. separately after we are back in lua ` end)`
+**Problems:** lua with C frames in between:
+```lua
+function my_protected_function()
+   player.GetHumans()[1]:Kill() -- Kill might be doing anything in between and get stuck in invalid state if we longjmp.
+end
+
+local function Also_Protected_AGainst_Timeout_Hook()
+  -- Timing out here is not possible. Or maybe we can run nested timeouts?
+  while true do end
+end
+hook.Add("PlayerDeath","a",Also_Protected_AGainst_Timeout_Hook)
+
+run_with_timeout(my_protected_function)
+
+```
 
 ### 2. Copy-on-write approach
 
